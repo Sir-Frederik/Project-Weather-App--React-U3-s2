@@ -1,15 +1,17 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Form, FormControl } from "react-bootstrap";
 import { useState } from "react";
 import MyHeader from "./MyHeader";
 import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/weather");
   };
+
   return (
     <Container fluid>
       <Row>
