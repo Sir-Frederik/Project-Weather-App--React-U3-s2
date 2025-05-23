@@ -1,11 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MyHeader from "./components/MyHeader";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./css/App.css";
-import { Col, Container, Row } from "react-bootstrap";
-import MyForm from "./components/MyForm";
-import Hompeage from "./components/Hompeage";
+
+import Homepage from "./components/Homepage";
 import Weather from "./components/Weather";
 // import Clouds from "./components/Clouds";
 
@@ -14,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {" "}
-        <Route path="/homepage" element={<Hompeage />} />
+        <Route path="/" element={<Homepage />} />
         <Route path="/weather" element={<Weather />} />
       </Routes>
     </BrowserRouter>
