@@ -9,7 +9,7 @@ const Homepage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/weather");
+    navigate(`/weather/${long}/${lat}`);
   };
 
   return (

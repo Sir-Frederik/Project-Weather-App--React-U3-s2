@@ -26,3 +26,12 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+.ErrorContainer {
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: url("../assets/404.jpg");
+  background-size: cover;
+  padding: 0;
+}
