@@ -30,7 +30,6 @@
   animation-delay: 3s;
 }
 
-/* ANIMAZIONE: fade-in + spostamento a destra */
 @keyframes cloud-fade-in-move {
   0% {
     opacity: 0;
