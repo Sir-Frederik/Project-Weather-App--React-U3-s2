@@ -17,6 +17,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/weather/:lat/:lon" element={<Weather />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/error" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

@@ -17,7 +17,6 @@ const Homepage = () => {
       .then((resp) => {
         if (resp.ok) {
           return resp.json();
-          console.log(resp);
         }
       })
 
@@ -25,12 +24,13 @@ const Homepage = () => {
         console.log("location" + location);
         const lon = location[0].lon;
         const lat = location[0].lat;
-        console.log("coordinate: " + lat + " " + lon);
+        // console.log("coordinate: " + lat + " " + lon);
 
         navigate(`/weather/${lat}/${lon}`);
       })
       .catch((error) => {
         console.error("Si è verificato un errore:", error);
+        navigate(`/error`);
       });
   };
   return (
