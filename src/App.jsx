@@ -14,7 +14,7 @@ function App() {
       <Routes>
         {" "}
         <Route path="/" element={<Homepage />} />
-        <Route path="/weather" element={<Weather />} />
+        <Route path="/weather/:lat/:lon" element={<Weather />} />
       </Routes>
     </BrowserRouter>
   );
