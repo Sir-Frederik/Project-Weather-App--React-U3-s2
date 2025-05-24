@@ -38,21 +38,28 @@ const Weather = () => {
 
   return (
     <>
-      <Container className="text-center mt-5">
-        <div>
-          <h3 className="fw-bold mb-3">{locationName}</h3>
-        </div>
-        <div className="text-start mb-4">
-          <img src={umbrellaCoyote} alt="Coyote" className="img-fluid" style={{ maxWidth: "150px" }} />
-        </div>
-        <Row className="justify-content-center">
-          <Col xs="auto" className="d-flex flex-column flex-md-row align-items-center" style={{ fontSize: "3rem" }}>
-            <img src={rainImg} className="weatherImg img-fluid me-md-4" alt="Meteo Icon" />
-            <span>
-              {" "}
-              <h2 className="temperature">{temperature}</h2>
-              <p className="unit"> °C</p>
-            </span>
+      <Container className="mt-5">
+        <Row className="align-items-start">
+          {/* Colonna Coyote */}
+          <Col xs="auto" className="d-flex justify-content-center">
+            <img src={umbrellaCoyote} alt="Coyote" className="img-fluid" style={{ width: "200px" }} />
+          </Col>
+          {/* Colonna Meteo */}
+          <Col>
+            <div className="text-center">
+              <h3 className="fw-bold mb-4" style={{ fontSize: "2.2rem" }}>
+                {locationName}
+              </h3>
+              <div className="d-flex flex-column flex-md-row align-items-center justify-content-center weather-block-lg">
+                <img src={rainImg} className="img-fluid weatherImg mb-2 mb-md-0 me-md-4" alt="Meteo Icon" />
+                <span className="d-flex flex-column align-items-center">
+                  <h2 className="temperature mb-0">{temperature}</h2>
+                  <small className="unit" style={{ marginTop: "-0.5em" }}>
+                    °C
+                  </small>
+                </span>
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>

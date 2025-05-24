@@ -48,3 +48,18 @@ body {
 .unit {
   font-size: 30px;
 }
+
+.weather-block-lg {
+  font-size: 4.5rem;
+  min-height: 220px;
+}
+.weather-block-lg .weatherImg {
+  width: 120px !important;
+  height: 120px !important;
+}
+.weather-block-lg .temperature {
+  font-size: 4rem;
+}
+.weather-block-lg .unit {
+  font-size: 2rem;
+}
