@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import rainImg from "../assets/WeatherIcon/Rain.png";
+import umbrellaCoyote from "../assets/wile_umbrella.png";
 
 const Weather = () => {
   const navigate = useNavigate();
@@ -38,12 +39,15 @@ const Weather = () => {
   return (
     <>
       <Container className="text-center mt-5">
+        <div>
+          <h3 className="fw-bold mb-3">{locationName}</h3>
+        </div>
+        <div className="text-start mb-4">
+          <img src={umbrellaCoyote} alt="Coyote" className="img-fluid" style={{ maxWidth: "150px" }} />
+        </div>
         <Row className="justify-content-center">
-          <Col xs={12}>
-            <h3 className="fw-bold mb-3">{locationName}</h3>
-          </Col>
           <Col xs="auto" className="d-flex flex-column flex-md-row align-items-center" style={{ fontSize: "3rem" }}>
-            <img src={rainImg} className="mb-3 mb-md-0 me-0 me-md-4 weatherImg" alt="Meteo" />
+            <img src={rainImg} className="weatherImg img-fluid me-md-4" alt="Meteo Icon" />
             <span>
               {" "}
               <h2 className="temperature">{temperature}</h2>
