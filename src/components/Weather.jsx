@@ -42,13 +42,15 @@ const Weather = () => {
           <Col xs={12}>
             <h3> {locationName} </h3>
           </Col>
-          <Col xs={12} md={6} className="d-flex justify-content-center">
+          <Col md={3}></Col>
+          <Col xs={12} md={3} className="d-flex justify-content-center">
             <img src={rainImg} className="img-fluid w-25 rounded" />
           </Col>
-          <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
+          <Col xs={12} md={3} className="d-flex align-items-center justify-content-center">
             <h3 className="text-center"> {temperature} </h3>
             {/* <p> °C</p> */}
           </Col>
+          <Col md={3}></Col>
         </Row>
       </Container>
     </>
