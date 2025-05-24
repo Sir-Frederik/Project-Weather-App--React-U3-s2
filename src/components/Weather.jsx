@@ -37,20 +37,19 @@ const Weather = () => {
 
   return (
     <>
-      <Container className="text-center mt-5  ">
-        <Row className="align-items-center g-0 ">
+      <Container className="text-center mt-5">
+        <Row className="justify-content-center">
           <Col xs={12}>
-            <h3> {locationName} </h3>
+            <h3 className="fw-bold mb-3">{locationName}</h3>
           </Col>
-          <Col md={3}></Col>
-          <Col xs={12} md={3} className="d-flex justify-content-center">
-            <img src={rainImg} className="img-fluid w-25 rounded" />
+          <Col xs="auto" className="d-flex flex-column flex-md-row align-items-center" style={{ fontSize: "3rem" }}>
+            <img src={rainImg} className="mb-3 mb-md-0 me-0 me-md-4 weatherImg" alt="Meteo" />
+            <span>
+              {" "}
+              <h2 className="temperature">{temperature}</h2>
+              <p className="unit"> °C</p>
+            </span>
           </Col>
-          <Col xs={12} md={3} className="d-flex align-items-center justify-content-center">
-            <h3 className="text-center"> {temperature} </h3>
-            {/* <p> °C</p> */}
-          </Col>
-          <Col md={3}></Col>
         </Row>
       </Container>
     </>

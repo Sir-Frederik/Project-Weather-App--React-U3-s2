@@ -36,3 +36,15 @@ body {
   background-size: cover;
   padding: 0;
 }
+
+.weatherImg {
+  width: 120px;
+  height: 130px;
+}
+
+.temperature {
+  font-size: 50px;
+}
+.unit {
+  font-size: 30px;
+}
