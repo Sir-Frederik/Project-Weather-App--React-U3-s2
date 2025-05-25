@@ -97,7 +97,9 @@ const Weather = () => {
 
   useEffect(() => {
     searchWeather(lat, lon);
+    // forecast(lat, lon);
   }, [lat, lon]);
+
   const handleGoHome = () => {
     navigate("/");
   };
