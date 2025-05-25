@@ -3,10 +3,26 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import rainImg from "../assets/WeatherIcon/Rain.png";
 import cloudsImg from "../assets/WeatherIcon/clouds.png";
+import clearImg from "../assets/WeatherIcon/Sun.png";
+import thunderImg from "../assets/WeatherIcon/Storm.png";
+import drizzleImg from "../assets/WeatherIcon/Drizzle.png";
+import snowImg from "../assets/WeatherIcon/Snow.png";
+import fogImg from "../assets/WeatherIcon/Fog.png";
+
 import umbrellaCoyote from "../assets/wile_umbrella.png";
 const weatherImgsMap = {
   Rain: rainImg,
   Clouds: cloudsImg,
+  Clear: clearImg,
+  Thunderstorm: thunderImg,
+  Drizzle: drizzleImg,
+  Snow: snowImg,
+  Mist: fogImg,
+  Fog: fogImg,
+  Dust: fogImg,
+  Sand: fogImg,
+  Haze: fogImg,
+  Smoke: fogImg,
 };
 
 const Weather = () => {
@@ -34,8 +50,8 @@ const Weather = () => {
         setLocationName(weather.name);
         setTemperature(weather.main.temp);
 
-        const mainType = "Rain";
-        // const mainType = weather.weather[0].main;
+        // const mainType = "Rain";
+        const mainType = weather.weather[0].main;
         const imgIcon = weatherImgsMap[mainType] || null;
         setWeatherImgType(imgIcon);
 
