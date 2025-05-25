@@ -73,25 +73,33 @@ const Weather = () => {
     <>
       <Container className="mt-5">
         <Row className="align-items-start">
-          <Col xs="auto" className="d-flex justify-content-center">
-            <img src={umbrellaCoyote} alt="Coyote" className="img-fluid" style={{ width: "200px" }} />
+          <Col xs={3} md="auto" className="d-flex justify-content-center">
+            <img src={umbrellaCoyote} alt="Coyote" className="img-fluid" style={{ maxWidth: "200px", width: "100%" }} />
           </Col>
 
           <Col>
-            <div className="text-center">
-              <h3 className="fw-bold mb-4" style={{ fontSize: "2.2rem" }}>
-                {locationName}
-              </h3>
-              <div className="d-flex flex-column flex-md-row align-items-center justify-content-center weather-block-lg">
-                <img src={weatherImgType} className="img-fluid weatherImg mb-2 mb-md-0 me-md-4" alt="Meteo Icon" />
-                <span className="d-flex flex-column align-items-center">
-                  <h2 className="temperature mb-0">{temperature}</h2>
-                  <small className="unit" style={{ marginTop: "-0.5em" }}>
-                    °C
-                  </small>
-                </span>
-              </div>
-            </div>
+            <Row className="justify-content-center text-center">
+              <Col xs={12}>
+                <h3 className="fw-bold mb-4 cityName">{locationName}</h3>
+              </Col>
+              <Col xs={12}>
+                <h4 className="fw-bold mb-4">{weatherDescription}</h4>
+              </Col>
+
+              <Col xs={12} md="auto" className="d-flex align-items-center justify-content-center weather-block-lg">
+                <Row>
+                  <Col xs={12} md={6}>
+                    <img src={weatherImgType} className="img-fluid weatherImg mb-5 " alt="Meteo Icon" />{" "}
+                  </Col>
+                  <Col xs={12} md={6} className="d-flex flex-column align-items-center">
+                    <h2 className="temperature mb-0">{temperature}</h2>
+                    <small className="unit" style={{ marginTop: "-0.5em" }}>
+                      °C
+                    </small>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>
