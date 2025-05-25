@@ -21,7 +21,6 @@ const Homepage = () => {
       })
 
       .then((location) => {
-        console.log("location" + location);
         const lon = location[0].lon;
         const lat = location[0].lat;
         // console.log("coordinate: " + lat + " " + lon);
