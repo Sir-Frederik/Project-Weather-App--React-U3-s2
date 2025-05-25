@@ -4,6 +4,10 @@ import { Col, Container, Row } from "react-bootstrap";
 import rainImg from "../assets/WeatherIcon/Rain.png";
 import cloudsImg from "../assets/WeatherIcon/clouds.png";
 import umbrellaCoyote from "../assets/wile_umbrella.png";
+const weatherImgsMap = {
+  Rain: rainImg,
+  Clouds: cloudsImg,
+};
 
 const Weather = () => {
   const navigate = useNavigate();
@@ -12,8 +16,8 @@ const Weather = () => {
   const [weatherType, setWeatherType] = useState("");
   const [locationName, setLocationName] = useState("");
   const [temperature, setTemperature] = useState("");
-  let weatherImgType = "";
-
+  const [weatherImgType, setWeatherImgType] = useState("");
+  3;
   const searchWeather = (lat, lon) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=2f26da6fb39093c3a6b6f3b61989f718&units=metric&lang=it`, {})
       .then((resp) => {
@@ -23,17 +27,21 @@ const Weather = () => {
       })
 
       .then((weather) => {
-        console.log("ciao sono searchWeather e ti do i parametri: " + lat + " " + lon);
+        // console.log("ciao sono searchWeather e ti do i parametri: " + lat + " " + lon);
 
         setWeatherDescription(weather.weather[0].description);
         setWeatherType(weather.weather[0].main);
         setLocationName(weather.name);
         setTemperature(weather.main.temp);
 
-        if (weatherType === "Clouds") {
+        const mainType = weather.weather[0].main;
+        const imgIcon = weatherImgsMap[mainType] || null;
+        setWeatherImgType(imgIcon);
+
+        /*  if (weatherType === "Clouds") {
           weatherImgType = cloudsImg;
           console.log(weatherImgType);
-        }
+        } */
       })
       .catch((error) => {
         console.error("Si è verificato un errore:", error);
@@ -41,9 +49,8 @@ const Weather = () => {
       });
   };
   useEffect(() => {
-    console.log("ciao sono weather e ti do i parametri: " + lat + " " + lon);
     searchWeather(lat, lon);
-  });
+  }, [lat, lon]);
 
   return (
     <>
