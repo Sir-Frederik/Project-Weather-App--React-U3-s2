@@ -34,7 +34,8 @@ const Weather = () => {
         setLocationName(weather.name);
         setTemperature(weather.main.temp);
 
-        const mainType = weather.weather[0].main;
+        const mainType = "Rain";
+        // const mainType = weather.weather[0].main;
         const imgIcon = weatherImgsMap[mainType] || null;
         setWeatherImgType(imgIcon);
 
