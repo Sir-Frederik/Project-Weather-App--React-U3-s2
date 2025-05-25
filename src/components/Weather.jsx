@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import rainImg from "../assets/WeatherIcon/Rain.png";
 import cloudsImg from "../assets/WeatherIcon/clouds.png";
 import clearImg from "../assets/WeatherIcon/Sun.png";
@@ -66,12 +66,15 @@ const Weather = () => {
       })
       .catch((error) => {
         console.error("Si è verificato un errore:", error);
-        navigate(`/error`);
+        navigate("/error");
       });
   };
   useEffect(() => {
     searchWeather(lat, lon);
   }, [lat, lon]);
+  const handleGoHome = () => {
+    navigate("/");
+  };
 
   return (
     <>
@@ -106,6 +109,9 @@ const Weather = () => {
             </Row>
           </Col>
         </Row>
+        <Button variant="primary" onClick={handleGoHome}>
+          Homepage
+        </Button>
       </Container>
     </>
   );
