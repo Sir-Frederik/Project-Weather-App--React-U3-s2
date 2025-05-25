@@ -10,19 +10,25 @@ import snowImg from "../assets/WeatherIcon/Snow.png";
 import fogImg from "../assets/WeatherIcon/Fog.png";
 
 import umbrellaCoyote from "../assets/wile_umbrella.png";
+import bugsSun from "../assets/bugs_sun.png";
+import tweetyCloud from "../assets/tweety_clouds.png";
+import coyoteThunder from "../assets/coyote_thunder.png";
+import snowMan from "../assets/snowman.png";
+import coyoteFog from "../assets/fog.png";
+
 const weatherImgsMap = {
-  Rain: rainImg,
-  Clouds: cloudsImg,
-  Clear: clearImg,
-  Thunderstorm: thunderImg,
-  Drizzle: drizzleImg,
-  Snow: snowImg,
-  Mist: fogImg,
-  Fog: fogImg,
-  Dust: fogImg,
-  Sand: fogImg,
-  Haze: fogImg,
-  Smoke: fogImg,
+  Rain: { icon: rainImg, funny: umbrellaCoyote },
+  Clouds: { icon: cloudsImg, funny: tweetyCloud },
+  Clear: { icon: clearImg, funny: bugsSun },
+  Thunderstorm: { icon: thunderImg, funny: coyoteThunder },
+  Drizzle: { icon: drizzleImg, funny: umbrellaCoyote },
+  Snow: { icon: snowImg, funny: snowMan },
+  Mist: { icon: fogImg, funny: coyoteFog },
+  Fog: { icon: fogImg, funny: coyoteFog },
+  Dust: { icon: fogImg, funny: coyoteFog },
+  Sand: { icon: fogImg, funny: coyoteFog },
+  Haze: { icon: fogImg, funny: coyoteFog },
+  Smoke: { icon: fogImg, funny: coyoteFog },
 };
 
 const Weather = () => {
@@ -33,6 +39,7 @@ const Weather = () => {
   const [locationName, setLocationName] = useState("");
   const [temperature, setTemperature] = useState("");
   const [weatherImgType, setWeatherImgType] = useState("");
+  const [funnyImgType, setFunnyImgType] = useState("");
   3;
   const searchWeather = (lat, lon) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=2f26da6fb39093c3a6b6f3b61989f718&units=metric&lang=it`, {})
@@ -43,22 +50,19 @@ const Weather = () => {
       })
 
       .then((weather) => {
-        // console.log("ciao sono searchWeather e ti do i parametri: " + lat + " " + lon);
-
         setWeatherDescription(weather.weather[0].description);
         setWeatherType(weather.weather[0].main);
         setLocationName(weather.name);
         setTemperature(weather.main.temp);
 
-        // const mainType = "Rain";
         const mainType = weather.weather[0].main;
-        const imgIcon = weatherImgsMap[mainType] || null;
-        setWeatherImgType(imgIcon);
+        const mappedImages = weatherImgsMap[mainType] || {};
+        const imgIcon = mappedImages.icon || null;
+        const funnyImg = mappedImages.funny || null;
+        // const funnyImg = mappedImages.funny || null;
 
-        /*  if (weatherType === "Clouds") {
-          weatherImgType = cloudsImg;
-          console.log(weatherImgType);
-        } */
+        setWeatherImgType(imgIcon);
+        setFunnyImgType(funnyImg);
       })
       .catch((error) => {
         console.error("Si è verificato un errore:", error);
@@ -74,7 +78,7 @@ const Weather = () => {
       <Container className="mt-5">
         <Row className="align-items-start">
           <Col xs={3} md="auto" className="d-flex justify-content-center">
-            <img src={umbrellaCoyote} alt="Coyote" className="img-fluid" style={{ maxWidth: "200px", width: "100%" }} />
+            <img src={funnyImgType} alt="funny Image" className="img-fluid funnyImg" />
           </Col>
 
           <Col>

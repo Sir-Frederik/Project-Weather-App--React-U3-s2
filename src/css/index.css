@@ -67,3 +67,9 @@ body {
 .unit {
   font-size: 2.5rem;
 }
+
+.funnyImg {
+  max-width: 299px !important;
+  width: 100%;
+  min-height: 236px !important;
+}
