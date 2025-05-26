@@ -2,6 +2,7 @@ import { Col, Container, Row, Form, FormControl } from "react-bootstrap";
 import { useState } from "react";
 import MyHeader from "./MyHeader";
 import { Await, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -33,18 +34,29 @@ const Homepage = () => {
       });
   };
   return (
-    <Container fluid>
-      <Row>
-        <Col>
-          <MyHeader />
-        </Col>
-        <Col xs={12}>
-          <Form onSubmit={handleSubmit} className="d-flex justify-content-center">
-            <FormControl className="w-50 my-4" type="text" placeholder="Cerca una città" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <div className="d-flex flex-column min-vh-100">
+        <Container fluid className="flex-grow-1">
+          <Row>
+            <Col>
+              <MyHeader />
+            </Col>
+            <Col xs={12}>
+              <Form onSubmit={handleSubmit} className="d-flex justify-content-center">
+                <FormControl
+                  className="w-50 my-4"
+                  type="text"
+                  placeholder="Cerca una città"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+        <Footer />
+      </div>
+    </>
   );
 };
 
