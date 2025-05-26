@@ -16,6 +16,7 @@ import coyoteThunder from "../assets/coyote_thunder.png";
 import snowMan from "../assets/snowman.png";
 import coyoteFog from "../assets/fog.png";
 
+// Mi serve per selezionare le immagini corrette in base alle informazioni delle api
 const weatherImgsMap = {
   Rain: { icon: rainImg, funny: umbrellaCoyote },
   Clouds: { icon: cloudsImg, funny: tweetyCloud },
@@ -30,15 +31,21 @@ const weatherImgsMap = {
   Haze: { icon: fogImg, funny: coyoteFog },
   Smoke: { icon: fogImg, funny: coyoteFog },
 };
+
+//Mi serve a selezionare un array di oggetti che prenderà solo i giorni alle 12:00. Mi garantisce di prendere 5 giorni diversi
 let dailyForecast = [];
 
 const Weather = () => {
+  //Qui dichiaro tutti gli stati che mi serviranno
   const navigate = useNavigate();
   const { lat, lon } = useParams();
+
   const [weatherDescription, setWeatherDescription] = useState("");
   const [weatherType, setWeatherType] = useState("");
   const [locationName, setLocationName] = useState("");
   const [temperature, setTemperature] = useState("");
+
+  //gli stati delle immagini e delle icone grosse (quelle piccole del forecast le prendo dalle api)
   const [weatherImgType, setWeatherImgType] = useState("");
   const [funnyImgType, setFunnyImgType] = useState("");
   const [forecastIcon1, setForecastIcon1] = useState("");
@@ -47,20 +54,24 @@ const Weather = () => {
   const [forecastIcon4, setForecastIcon4] = useState("");
   const [forecastIcon5, setForecastIcon5] = useState("");
 
+  // gli stati che mi salveranno le temperature del forecast
   const [forecastTmp1, setForecastTmp1] = useState("");
   const [forecastTmp2, setForecastTmp2] = useState("");
   const [forecastTmp3, setForecastTmp3] = useState("");
   const [forecastTmp4, setForecastTmp4] = useState("");
   const [forecastTmp5, setForecastTmp5] = useState("");
 
+  // gli stati che mi salveranno le date del forecast
   const [forecastDate1, setForecastDate1] = useState("");
   const [forecastDate2, setForecastDate2] = useState("");
   const [forecastDate3, setForecastDate3] = useState("");
   const [forecastDate4, setForecastDate4] = useState("");
   const [forecastDate5, setForecastDate5] = useState("");
 
+  //Questo mi servirà per stampare le data corrente.
   const now = new Date();
 
+  //Qesta funzione fetch mi carica il meteo corrente, converito in italiano e in unità di misura metrica (°C, m/s qualora mi servisse la vel del vento)
   const searchWeather = (lat, lon) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=2f26da6fb39093c3a6b6f3b61989f718&units=metric&lang=it`, {})
       .then((resp) => {
@@ -70,11 +81,13 @@ const Weather = () => {
       })
 
       .then((weather) => {
+        // qui setto gli stati della descrizione, immagini, e temperatura, che poi renderizzerò nel return.
         setWeatherDescription(weather.weather[0].description);
         setWeatherType(weather.weather[0].main);
         setLocationName(weather.name);
         setTemperature(weather.main.temp);
 
+        //qui mi collego a weatherImgMap per usare le immagini e le icone correte in base al contenuto del meteo dell'api
         const mainType = weather.weather[0].main;
         const mappedImages = weatherImgsMap[mainType] || {};
         const imgIcon = mappedImages.icon || null;
@@ -88,6 +101,8 @@ const Weather = () => {
         navigate("/error");
       });
   };
+
+  //Con questa api posso vedere il meteo per 5 giorni, ogni 3 ore, ma a me serviranno solo 5 rilevazioni alle 12:00
   const forecast = (lat, lon) => {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=2f26da6fb39093c3a6b6f3b61989f718&units=metric&lang=it`, {})
       .then((resp) => {
@@ -96,9 +111,11 @@ const Weather = () => {
         }
       })
       .then((forecast) => {
+        // Qui vado a riempire l'array specificato prima, selezionando tutti i valori che hanno "12:00:00" nel dt_txt del json.
         dailyForecast = forecast.list.filter((item) => item.dt_txt.endsWith("12:00:00")).slice(0, 5);
-        console.log(dailyForecast);
+        // console.log(dailyForecast);
 
+        //Mi garantisco  che i valori siano almeno 5 e setto gli stati delle icone, della temperatura  e della data in base ai valori del mio array.
         if (dailyForecast.length >= 5) {
           setForecastIcon1(dailyForecast[0].weather[0].icon);
           setForecastIcon2(dailyForecast[1].weather[0].icon);
@@ -112,6 +129,7 @@ const Weather = () => {
           setForecastTmp4(dailyForecast[3].main.temp);
           setForecastTmp5(dailyForecast[4].main.temp);
 
+          //qui mi chiamerò la funzione formatShortDate specificata in basso
           setForecastDate1(formatShortDate(dailyForecast[0].dt_txt));
           setForecastDate2(formatShortDate(dailyForecast[1].dt_txt));
           setForecastDate3(formatShortDate(dailyForecast[2].dt_txt));
@@ -124,20 +142,25 @@ const Weather = () => {
         navigate("/error");
       });
   };
+
+  // questa funzione mi tronca ritorna la data con solo il giorno ed il mese.
   const formatShortDate = (dateString) => {
     const date = new Date(dateString);
     return `${date.getDate()}/${date.getMonth() + 1}`;
   };
 
+  // questo useEffect si carica appena il componente viene renderizzato e mi fa partire le due funzioni di fetch.
   useEffect(() => {
     searchWeather(lat, lon);
     forecast(lat, lon);
   }, [lat, lon]);
 
+  //gestisce il pulsante, mi fa tornare alla main route.
   const handleGoHome = () => {
     navigate("/");
   };
 
+  // funzione che mi stamperà la data corrente nel meteo attuale. Nota: non prende i dati dall'api, ma da JS, ma la ritengo  una approssimazione accetabile.
   const formatted = now.toLocaleString("it-IT", {
     day: "2-digit",
     month: "2-digit",
@@ -148,6 +171,7 @@ const Weather = () => {
 
   return (
     <>
+      {/* Qui mi creo tutta la struttura estetica e mi stampo le informazioni. Ci sto ancora lavorando.  */}
       <Container className="mt-5">
         <Row className="align-items-start">
           <Col xs={3} md="auto" className="d-flex justify-content-center">
