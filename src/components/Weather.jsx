@@ -70,7 +70,7 @@ const Weather = () => {
   const [forecastDate5, setForecastDate5] = useState("");
 
   //Questo mi servirà per stampare le data corrente.
-  const now = new Date();
+  const [nowDate, setNowDate] = useState("");
 
   //Qesta funzione fetch mi carica il meteo corrente, converito in italiano e in unità di misura metrica (°C, m/s qualora mi servisse la vel del vento)
   const searchWeather = (lat, lon) => {
@@ -87,6 +87,10 @@ const Weather = () => {
         setWeatherType(weather.weather[0].main);
         setLocationName(weather.name);
         setTemperature(weather.main.temp);
+        //qui setto lo stato nowDate e ci metto il valore dt in formato unix. Lo converto in una data moltiplicandolo per 1000 e lo converto in stringa.
+        // Noto però che la data fornita non è quella del fuso  orario della città, ma quella di Roma.
+        setNowDate(new Date(weather.dt * 1000).toLocaleString());
+        console.log(nowDate + "data  attuale");
 
         //qui mi collego a weatherImgMap per usare le immagini e le icone correte in base al contenuto del meteo dell'api
         const mainType = weather.weather[0].main;
@@ -161,15 +165,6 @@ const Weather = () => {
     navigate("/");
   };
 
-  // funzione che mi stamperà la data corrente nel meteo attuale. Nota: non prende i dati dall'api, ma da JS, ma la ritengo  una approssimazione accetabile.
-  const formatted = now.toLocaleString("it-IT", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
   return (
     <>
       {/* Qui mi creo tutta la struttura estetica e mi stampo le informazioni. Ci sto ancora lavorando.  */}
@@ -186,7 +181,7 @@ const Weather = () => {
                   <h3 className="fw-bold mb-3 cityName">{locationName}</h3>
                 </Col>
                 <Col>
-                  <h5> Meteo Attuale ( {formatted} )</h5>
+                  <h5> Meteo Attuale ( {nowDate} )</h5>
                 </Col>
                 <Col xs={12}>
                   <h4 className="fw-bold  mt-4 fs-2">{weatherDescription.toUpperCase()}</h4>
