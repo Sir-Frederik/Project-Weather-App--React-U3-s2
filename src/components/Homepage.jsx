@@ -36,23 +36,15 @@ const Homepage = () => {
   return (
     <>
       <div className="d-flex flex-column min-vh-100">
-        <Container fluid className="flex-grow-1">
-          <Row>
-            <Col>
-              <MyHeader />
-            </Col>
-            <Col xs={12}>
-              <Form onSubmit={handleSubmit} className="d-flex justify-content-center">
-                <FormControl
-                  className="w-50 my-4"
-                  type="text"
-                  placeholder="Cerca una città"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </Form>
-            </Col>
-          </Row>
+        <Container fluid className="flex-grow-1 ms-3">
+          <div className="ms-4">
+            {" "}
+            <MyHeader />
+          </div>
+
+          <Form onSubmit={handleSubmit} className="d-flex justify-content-center">
+            <FormControl className="w-50 my-4" type="text" placeholder="Cerca una città" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          </Form>
         </Container>
         <Footer />
       </div>
