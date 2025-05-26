@@ -189,7 +189,7 @@ const Weather = () => {
                   <h5> Meteo Attuale ( {formatted} )</h5>
                 </Col>
                 <Col xs={12}>
-                  <h4 className="fw-bold  mt-4 fs-2">{weatherDescription}</h4>
+                  <h4 className="fw-bold  mt-4 fs-2">{weatherDescription.toUpperCase()}</h4>
                 </Col>
 
                 <Col xs={12} md="auto" className="d-flex align-items-center justify-content-center weather-block-lg">
