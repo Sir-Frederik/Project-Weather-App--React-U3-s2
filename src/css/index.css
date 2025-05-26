@@ -73,3 +73,11 @@ body {
   width: 100%;
   min-height: 236px !important;
 }
+
+th {
+  background-color: #ececec !important;
+  text-align: center !important;
+}
+/* td {
+  background-color: white !important;
+} */

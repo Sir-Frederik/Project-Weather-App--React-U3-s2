@@ -46,6 +46,12 @@ const Weather = () => {
   const [forecastIcon4, setForecastIcon4] = useState("");
   const [forecastIcon5, setForecastIcon5] = useState("");
 
+  const [forecastTmp1, setForecastTmp1] = useState("");
+  const [forecastTmp2, setForecastTmp2] = useState("");
+  const [forecastTmp3, setForecastTmp3] = useState("");
+  const [forecastTmp4, setForecastTmp4] = useState("");
+  const [forecastTmp5, setForecastTmp5] = useState("");
+
   const searchWeather = (lat, lon) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=2f26da6fb39093c3a6b6f3b61989f718&units=metric&lang=it`, {})
       .then((resp) => {
@@ -87,7 +93,12 @@ const Weather = () => {
         setForecastIcon3(forecast.list[2].weather[0].icon);
         setForecastIcon4(forecast.list[3].weather[0].icon);
         setForecastIcon5(forecast.list[4].weather[0].icon);
-        console.log("ciaos ono l'icona: " + forecastIcon1);
+
+        setForecastTmp1(forecast.list[0].main.temp);
+        setForecastTmp2(forecast.list[1].main.temp);
+        setForecastTmp3(forecast.list[2].main.temp);
+        setForecastTmp4(forecast.list[3].main.temp);
+        setForecastTmp5(forecast.list[4].main.temp);
       })
       .catch((error) => {
         console.error("Si è verificato un errore:", error);
@@ -141,34 +152,51 @@ const Weather = () => {
           Homepage
         </Button>
 
-        <Table striped bordered hover className="mt-3">
+        <Table bordered className="mt-3 mb-3">
           <thead>
             <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
               <td>
                 <img src={`https://openweathermap.org/img/wn/${forecastIcon1}@2x.png`} alt="Weather icon" />
               </td>
-              <td>Otto</td>
-              <td>@mdo</td>
+              <td>
+                {" "}
+                <img src={`https://openweathermap.org/img/wn/${forecastIcon2}@2x.png`} alt="Weather icon" />
+              </td>
+              <td>
+                <img src={`https://openweathermap.org/img/wn/${forecastIcon3}@2x.png`} alt="Weather icon" />
+              </td>
+              <td>
+                <img src={`https://openweathermap.org/img/wn/${forecastIcon4}@2x.png`} alt="Weather icon" />
+              </td>
+              <td>
+                <img src={`https://openweathermap.org/img/wn/${forecastIcon5}@2x.png`} alt="Weather icon" />
+              </td>
             </tr>
             <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td colSpan={2}>Larry the Bird</td>
-              <td>@twitter</td>
+              <td>
+                <h5> {forecastTmp1} °C </h5>
+              </td>
+              <td>
+                <h5> {forecastTmp2} °C </h5>
+              </td>
+              <td>
+                <h5> {forecastTmp3} °C </h5>
+              </td>
+              <td>
+                <h5> {forecastTmp4} °C </h5>
+              </td>
+              <td>
+                <h5> {forecastTmp5} °C </h5>
+              </td>
             </tr>
           </tbody>
         </Table>
