@@ -52,6 +52,12 @@ const Weather = () => {
   const [forecastTmp4, setForecastTmp4] = useState("");
   const [forecastTmp5, setForecastTmp5] = useState("");
 
+  const [forecastDate1, setForecastDate1] = useState("");
+  const [forecastDate2, setForecastDate2] = useState("");
+  const [forecastDate3, setForecastDate3] = useState("");
+  const [forecastDate4, setForecastDate4] = useState("");
+  const [forecastDate5, setForecastDate5] = useState("");
+
   const searchWeather = (lat, lon) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=2f26da6fb39093c3a6b6f3b61989f718&units=metric&lang=it`, {})
       .then((resp) => {
@@ -70,7 +76,6 @@ const Weather = () => {
         const mappedImages = weatherImgsMap[mainType] || {};
         const imgIcon = mappedImages.icon || null;
         const funnyImg = mappedImages.funny || null;
-        // const funnyImg = mappedImages.funny || null;
 
         setWeatherImgType(imgIcon);
         setFunnyImgType(funnyImg);
@@ -99,6 +104,14 @@ const Weather = () => {
         setForecastTmp3(forecast.list[2].main.temp);
         setForecastTmp4(forecast.list[3].main.temp);
         setForecastTmp5(forecast.list[4].main.temp);
+
+        setForecastDate1(forecast.list[0].dt_txt);
+        setForecastDate2(forecast.list[1].dt_txt);
+        setForecastDate3(forecast.list[2].dt_txt);
+        setForecastDate4(forecast.list[3].dt_txt);
+        setForecastDate5(forecast.list[4].dt_txt);
+
+        console.log(forecastDate1);
       })
       .catch((error) => {
         console.error("Si è verificato un errore:", error);
@@ -155,11 +168,21 @@ const Weather = () => {
         <Table bordered className="mt-3 mb-3">
           <thead>
             <tr>
-              <th>1</th>
-              <th>2</th>
-              <th>3</th>
-              <th>4</th>
-              <th>5</th>
+              <th>
+                <h5> {forecastDate1} </h5>
+              </th>
+              <th>
+                <h5> {forecastDate2} </h5>
+              </th>
+              <th>
+                <h5> {forecastDate3} </h5>
+              </th>
+              <th>
+                <h5> {forecastDate4} </h5>
+              </th>
+              <th>
+                <h5> {forecastDate5} </h5>
+              </th>
             </tr>
           </thead>
           <tbody>
