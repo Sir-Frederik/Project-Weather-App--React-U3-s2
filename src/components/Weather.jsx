@@ -75,7 +75,7 @@ const Weather = () => {
       });
   };
   const forecast = (lat, lon) => {
-    fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=2f26da6fb39093c3a6b6f3b61989f718&units=metric&lang=it`, {})
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=2f26da6fb39093c3a6b6f3b61989f718&units=metric&lang=it`, {})
       .then((resp) => {
         if (resp.ok) {
           return resp.json();
@@ -83,10 +83,10 @@ const Weather = () => {
       })
       .then((forecast) => {
         setForecastIcon1(forecast.list[0].weather[0].icon);
-        setForecastIcon2(forecast.list[1].weather[1].icon);
-        setForecastIcon3(forecast.list[2].weather[2].icon);
-        setForecastIcon4(forecast.list[3].weather[3].icon);
-        setForecastIcon5(forecast.list[4].weather[4].icon);
+        setForecastIcon2(forecast.list[1].weather[0].icon);
+        setForecastIcon3(forecast.list[2].weather[0].icon);
+        setForecastIcon4(forecast.list[3].weather[0].icon);
+        setForecastIcon5(forecast.list[4].weather[0].icon);
         console.log("ciaos ono l'icona: " + forecastIcon1);
       })
       .catch((error) => {
@@ -97,7 +97,7 @@ const Weather = () => {
 
   useEffect(() => {
     searchWeather(lat, lon);
-    // forecast(lat, lon);
+    forecast(lat, lon);
   }, [lat, lon]);
 
   const handleGoHome = () => {
