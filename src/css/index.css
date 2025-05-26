@@ -18,9 +18,9 @@ p {
 .cityName {
   font-size: 4rem;
 }
-/* h4 {
-  font-size: 3rem;
-} */
+h1 {
+  font-size: 4rem !important;
+}
 html,
 body {
   height: 100%;
