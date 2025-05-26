@@ -31,6 +31,7 @@ const weatherImgsMap = {
   Smoke: { icon: fogImg, funny: coyoteFog },
 };
 let dailyForecast = [];
+
 const Weather = () => {
   const navigate = useNavigate();
   const { lat, lon } = useParams();
@@ -57,6 +58,8 @@ const Weather = () => {
   const [forecastDate3, setForecastDate3] = useState("");
   const [forecastDate4, setForecastDate4] = useState("");
   const [forecastDate5, setForecastDate5] = useState("");
+
+  const now = new Date();
 
   const searchWeather = (lat, lon) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=2f26da6fb39093c3a6b6f3b61989f718&units=metric&lang=it`, {})
@@ -135,6 +138,14 @@ const Weather = () => {
     navigate("/");
   };
 
+  const formatted = now.toLocaleString("it-IT", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   return (
     <>
       <Container className="mt-5">
@@ -146,10 +157,13 @@ const Weather = () => {
           <Col>
             <Row className="justify-content-center text-center">
               <Col xs={12}>
-                <h3 className="fw-bold mb-4 cityName">{locationName}</h3>
+                <h3 className="fw-bold mb-3 cityName">{locationName}</h3>
+              </Col>
+              <Col>
+                <h5> Meteo Attuale ( {formatted} )</h5>
               </Col>
               <Col xs={12}>
-                <h4 className="fw-bold mb-4">{weatherDescription}</h4>
+                <h4 className="fw-bold mb-1 mt-3 fs-2">{weatherDescription}</h4>
               </Col>
 
               <Col xs={12} md="auto" className="d-flex align-items-center justify-content-center weather-block-lg">
@@ -159,77 +173,77 @@ const Weather = () => {
                   </Col>
                   <Col xs={12} md={6} className="d-flex flex-column align-items-center">
                     <h2 className="temperature mb-0">{temperature}</h2>
-                    <small className="unit" style={{ marginTop: "-0.5em" }}>
-                      °C
-                    </small>
+                    <small className="unit">°C</small>
                   </Col>
                 </Row>
               </Col>
             </Row>
           </Col>
         </Row>
-        <Button variant="primary" onClick={handleGoHome}>
-          Homepage
-        </Button>
-
-        <Table bordered className="mt-3 mb-3">
-          <thead>
-            <tr>
-              <th>
-                <h5> {forecastDate1} </h5>
-              </th>
-              <th>
-                <h5> {forecastDate2} </h5>
-              </th>
-              <th>
-                <h5> {forecastDate3} </h5>
-              </th>
-              <th>
-                <h5> {forecastDate4} </h5>
-              </th>
-              <th>
-                <h5> {forecastDate5} </h5>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <img src={`https://openweathermap.org/img/wn/${forecastIcon1}@2x.png`} alt="Weather icon" />
-              </td>
-              <td>
-                {" "}
-                <img src={`https://openweathermap.org/img/wn/${forecastIcon2}@2x.png`} alt="Weather icon" />
-              </td>
-              <td>
-                <img src={`https://openweathermap.org/img/wn/${forecastIcon3}@2x.png`} alt="Weather icon" />
-              </td>
-              <td>
-                <img src={`https://openweathermap.org/img/wn/${forecastIcon4}@2x.png`} alt="Weather icon" />
-              </td>
-              <td>
-                <img src={`https://openweathermap.org/img/wn/${forecastIcon5}@2x.png`} alt="Weather icon" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <h5> {forecastTmp1} °C </h5>
-              </td>
-              <td>
-                <h5> {forecastTmp2} °C </h5>
-              </td>
-              <td>
-                <h5> {forecastTmp3} °C </h5>
-              </td>
-              <td>
-                <h5> {forecastTmp4} °C </h5>
-              </td>
-              <td>
-                <h5> {forecastTmp5} °C </h5>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+        <Container className="mt-2">
+          <Button variant="primary" onClick={handleGoHome}>
+            Homepage
+          </Button>
+          <h2 className="mt-4"> Meteo dei prossimi giorni:</h2>
+          <Table bordered className="mt-3 mb-3">
+            <thead>
+              <tr>
+                <th>
+                  <h5> {forecastDate1} </h5>
+                </th>
+                <th>
+                  <h5> {forecastDate2} </h5>
+                </th>
+                <th>
+                  <h5> {forecastDate3} </h5>
+                </th>
+                <th>
+                  <h5> {forecastDate4} </h5>
+                </th>
+                <th>
+                  <h5> {forecastDate5} </h5>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <img src={`https://openweathermap.org/img/wn/${forecastIcon1}@2x.png`} alt="Weather icon" />
+                </td>
+                <td>
+                  {" "}
+                  <img src={`https://openweathermap.org/img/wn/${forecastIcon2}@2x.png`} alt="Weather icon" />
+                </td>
+                <td>
+                  <img src={`https://openweathermap.org/img/wn/${forecastIcon3}@2x.png`} alt="Weather icon" />
+                </td>
+                <td>
+                  <img src={`https://openweathermap.org/img/wn/${forecastIcon4}@2x.png`} alt="Weather icon" />
+                </td>
+                <td>
+                  <img src={`https://openweathermap.org/img/wn/${forecastIcon5}@2x.png`} alt="Weather icon" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5> {forecastTmp1} °C </h5>
+                </td>
+                <td>
+                  <h5> {forecastTmp2} °C </h5>
+                </td>
+                <td>
+                  <h5> {forecastTmp3} °C </h5>
+                </td>
+                <td>
+                  <h5> {forecastTmp4} °C </h5>
+                </td>
+                <td>
+                  <h5> {forecastTmp5} °C </h5>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </Container>
       </Container>
     </>
   );

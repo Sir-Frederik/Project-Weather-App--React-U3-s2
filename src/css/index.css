@@ -16,8 +16,11 @@ p {
 }
 
 .cityName {
-  font-size: 3rem;
+  font-size: 4rem;
 }
+/* h4 {
+  font-size: 3rem;
+} */
 html,
 body {
   height: 100%;
@@ -65,7 +68,7 @@ body {
   font-size: 4rem;
 }
 .unit {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
 }
 
 .funnyImg {
@@ -78,6 +81,6 @@ th {
   background-color: #ececec !important;
   text-align: center !important;
 }
-/* td {
-  background-color: white !important;
-} */
+td {
+  text-align: center !important;
+}
