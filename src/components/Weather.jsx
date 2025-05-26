@@ -30,7 +30,7 @@ const weatherImgsMap = {
   Haze: { icon: fogImg, funny: coyoteFog },
   Smoke: { icon: fogImg, funny: coyoteFog },
 };
-
+let dailyForecast = [];
 const Weather = () => {
   const navigate = useNavigate();
   const { lat, lon } = useParams();
@@ -93,25 +93,28 @@ const Weather = () => {
         }
       })
       .then((forecast) => {
-        setForecastIcon1(forecast.list[0].weather[0].icon);
-        setForecastIcon2(forecast.list[1].weather[0].icon);
-        setForecastIcon3(forecast.list[2].weather[0].icon);
-        setForecastIcon4(forecast.list[3].weather[0].icon);
-        setForecastIcon5(forecast.list[4].weather[0].icon);
+        dailyForecast = forecast.list.filter((item) => item.dt_txt.endsWith("12:00:00")).slice(0, 5);
+        console.log(dailyForecast);
 
-        setForecastTmp1(forecast.list[0].main.temp);
-        setForecastTmp2(forecast.list[1].main.temp);
-        setForecastTmp3(forecast.list[2].main.temp);
-        setForecastTmp4(forecast.list[3].main.temp);
-        setForecastTmp5(forecast.list[4].main.temp);
+        if (dailyForecast.length >= 5) {
+          setForecastIcon1(dailyForecast[0].weather[0].icon);
+          setForecastIcon2(dailyForecast[1].weather[0].icon);
+          setForecastIcon3(dailyForecast[2].weather[0].icon);
+          setForecastIcon4(dailyForecast[3].weather[0].icon);
+          setForecastIcon5(dailyForecast[4].weather[0].icon);
 
-        setForecastDate1(forecast.list[0].dt_txt);
-        setForecastDate2(forecast.list[1].dt_txt);
-        setForecastDate3(forecast.list[2].dt_txt);
-        setForecastDate4(forecast.list[3].dt_txt);
-        setForecastDate5(forecast.list[4].dt_txt);
+          setForecastTmp1(dailyForecast[0].main.temp);
+          setForecastTmp2(dailyForecast[1].main.temp);
+          setForecastTmp3(dailyForecast[2].main.temp);
+          setForecastTmp4(dailyForecast[3].main.temp);
+          setForecastTmp5(dailyForecast[4].main.temp);
 
-        console.log(forecastDate1);
+          setForecastDate1(dailyForecast[0].dt_txt);
+          setForecastDate2(dailyForecast[1].dt_txt);
+          setForecastDate3(dailyForecast[2].dt_txt);
+          setForecastDate4(dailyForecast[3].dt_txt);
+          setForecastDate5(dailyForecast[4].dt_txt);
+        }
       })
       .catch((error) => {
         console.error("Si è verificato un errore:", error);
