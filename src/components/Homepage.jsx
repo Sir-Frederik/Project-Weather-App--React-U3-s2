@@ -43,7 +43,13 @@ const Homepage = () => {
           </div>
 
           <Form onSubmit={handleSubmit} className="d-flex justify-content-center">
-            <FormControl className="w-50 my-4" type="text" placeholder="Cerca una città" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+            <FormControl
+              className="w-50 my-4"
+              type="text"
+              placeholder="Cerca una città per vederne il Meteo"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </Form>
         </Container>
         <Footer />
