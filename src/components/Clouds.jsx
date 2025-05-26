@@ -1,3 +1,5 @@
+// questo componente non funziona ancora. Voglio usarlo per creare animazioni con le nuvole.
+
 import cloud1 from "/assets/cloud1.png";
 import cloud2 from "../assets/cloud2.png";
 import cloud3 from "../assets/cloud3.png";
