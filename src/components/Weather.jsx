@@ -109,17 +109,21 @@ const Weather = () => {
           setForecastTmp4(dailyForecast[3].main.temp);
           setForecastTmp5(dailyForecast[4].main.temp);
 
-          setForecastDate1(dailyForecast[0].dt_txt);
-          setForecastDate2(dailyForecast[1].dt_txt);
-          setForecastDate3(dailyForecast[2].dt_txt);
-          setForecastDate4(dailyForecast[3].dt_txt);
-          setForecastDate5(dailyForecast[4].dt_txt);
+          setForecastDate1(formatShortDate(dailyForecast[0].dt_txt));
+          setForecastDate2(formatShortDate(dailyForecast[1].dt_txt));
+          setForecastDate3(formatShortDate(dailyForecast[2].dt_txt));
+          setForecastDate4(formatShortDate(dailyForecast[3].dt_txt));
+          setForecastDate5(formatShortDate(dailyForecast[4].dt_txt));
         }
       })
       .catch((error) => {
         console.error("Si è verificato un errore:", error);
         navigate("/error");
       });
+  };
+  const formatShortDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getDate()}/${date.getMonth() + 1}`;
   };
 
   useEffect(() => {
